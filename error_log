@@ -1,0 +1,8 @@
+[03-Aug-2018 11:03:38 America/Chicago] PHP Fatal error:  Uncaught PDOException: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: NO) in /home/guabba/public_html/accidentestransito/core/Database.php:10
+Stack trace:
+#0 /home/guabba/public_html/accidentestransito/core/Database.php(10): PDO->__construct('mysql:host=loca...', 'root', '')
+#1 /home/guabba/public_html/accidentestransito/app/models/Bitacora.php(10): Database::getConnection()
+#2 /home/guabba/public_html/accidentestransito/index.php(16): Bitacora->__construct()
+#3 {main}
+  thrown in /home/guabba/public_html/accidentestransito/core/Database.php on line 10
+[03-Aug-2018 11:27:53 America/Chicago] PHP Fatal error:  require_once(): Failed opening required 'app/models/distrito.php' (include_path='.:/opt/php71/lib/php') in /home/guabba/public_html/accidentestransito/app/controllers/DistritoController.php on line 2

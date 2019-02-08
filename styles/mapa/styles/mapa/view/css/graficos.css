@@ -1,0 +1,81 @@
+*,*:after, *:before{
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#cargando {
+    border: 15px solid #ccc;
+    border-top-color: #0B8A60;
+    border-top-style: groove;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    -webkit-animation: girar 1.5s linear infinite;
+    -o-animation: girar 1.5s linear infinite;
+    animation: girar 1.5s linear infinite;
+}
+
+@keyframes girar {
+    from { transform: rotate(0deg);}
+    to { transform: rotate(360deg);}
+
+}
+
+.canvas-grafico {
+    padding: 0px;
+    text-align: center;
+}
+
+.div-grafico {
+    height: auto;
+    width: 500px;
+}
+
+.tabla {
+    display: flex;
+    justify-content: center;
+}
+
+table.tabgraf {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;
+    margin: 10px;
+    width: 480px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+th.tablagraf {
+    font-size: 13px;
+    font-weight: normal;
+    padding: 8px;
+    background: #b9c9fe;
+    border-top: 4px solid #aabcfe;
+    border-bottom: 1px solid #fff;
+    color: #039;
+    text-align: center;
+}
+
+td.tablagraf {
+    padding: 8px;
+    background: #e8edff;
+    border-bottom: 1px solid #fff;
+    color: #669;
+    border-top: 1px solid transparent;
+}
+
+tr:hover td.tablagraf {
+    background: #d0dafd; color: #339;
+}
+
+

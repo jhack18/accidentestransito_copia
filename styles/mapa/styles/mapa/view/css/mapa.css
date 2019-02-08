@@ -1,0 +1,273 @@
+.mapa {
+    width: 83.33333%;
+    height: 600px;
+}
+
+.mapacompleto {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.mapa-corto {
+    width: 100%; 
+    height: 590px;
+}
+
+.mapa-corto-total {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+}
+
+.col-gg-6 {
+    width: 50%;
+    height: 100%;
+}
+
+.espacio {
+    padding-left: 0.935rem;
+}
+
+.flotante {
+     width: 220px;
+     height: 320px;
+    background-color: rgba(223, 0, 16, 0.7);
+     border-bottom-right-radius: 25px;
+     border-top-right-radius: 25px;
+     bottom: 0;
+     position: fixed;
+     /*Estilos para que se ponga en el centro abajo
+     left: 50%;
+     margin-left: -260px;
+     border-top-left-radius: 25px;
+     border-top-right-radius: 25px;
+     */
+     top: 20%;
+     margin-left: 0px;
+ }
+
+.flotante-derecha {
+    width: 220px;
+    height: 320px;
+    background-color: rgba(223, 0, 16, 0.7);
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+    bottom: 0;
+    position: fixed;
+    /*Estilos para que se ponga en el centro abajo
+    left: 50%;
+    margin-left: -260px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    */
+    top: 20%;
+    right: 0px;
+}
+
+.movimiento {
+    width: 15px;
+    height: 30px;
+    background-color: rgba(223, 0, 16, 0.7);
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    bottom: 0;
+    position: fixed;
+    /*Estilos para que se ponga en el centro abajo
+    left: 50%;
+    margin-left: -260px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    */
+    top: 38%;
+    margin-left: 220px;
+}
+
+.movimiento-derecha {
+    width: 15px;
+    height: 30px;
+    background-color: rgba(223, 0, 16, 0.7);
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    bottom: 0;
+    position: fixed;
+    top: 38%;
+    right: 220px;
+}
+
+.flotante-superior {
+    width: 600px;
+    height: 60px;
+    background-color: rgba(223, 0, 16, 0.7);
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    position: fixed;
+    left: 50%;
+    margin-left: -300px;
+}
+
+.texto-barra{
+    font-family: "Montserrat";
+    font-size: 1rem;
+    font-weight: 700;
+    white-space: normal;
+    color: white;
+}
+
+.contenedor-barra {
+    padding-top: 10px;
+    padding-left: 40px;
+}
+
+@media screen and (max-width: 640px){
+    .flotante-superior {
+        width: 300px;
+        height: 60px;
+        background-color: rgba(223, 0, 16, 0.7);
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+        position: fixed;
+        left: 50%;
+        margin-left: -150px;
+    }
+}
+
+@media screen and (max-width: 640px){
+    .contenedor-barra {
+        padding-top: 10px;
+        padding-left: 20px;
+    }
+}
+
+@media screen and (max-width: 640px){
+    .texto-barra{
+        font-family: "Montserrat";
+        font-size: 0.45rem;
+        font-weight: 700;
+        white-space: normal;
+        color: white;
+    }
+}
+
+.flotante-superior-mini {
+     width: 200px;
+     height: 60px;
+     background-color: rgba(65, 198, 95, 0.7);
+     border-bottom-left-radius: 25px;
+     border-bottom-right-radius: 25px;
+     position: fixed;
+     left: 50%;
+     margin-left: -600px;
+ }
+
+.acomodar {
+    padding-left: 48px;
+}
+
+.flotante-superior-mini2 {
+    width: 200px;
+    height: 60px;
+    background-color: rgba(65, 198, 95, 0.7);
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    position: fixed;
+    left: 50%;
+    margin-left: 400px;
+}
+
+.logo-barra {
+    height: 2.375rem;
+}
+
+
+#datos-a-cargar {
+    padding-top: 10px;
+}
+
+html {
+    min-height: 100%;
+    position: relative;
+  }
+body {
+    margin: 0;
+    margin-bottom: 40px;
+}
+.pegado {
+    background-color: black;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: white;
+  }
+
+@media (max-width:1000px){
+    .pegado {
+        background-color: black;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        color: white;
+      }
+
+      .mapa {
+        width: 100%; 
+        height: 740px;
+    }
+}
+
+.opcionador {
+    position: relative;
+    border: 1px solid #ccc;
+    width: 120px;
+    overflow: hidden;
+    background-color: #fff;
+  }
+    
+  .opcionador:before {
+      content: '';
+      position: absolute;
+      right: 5px;
+      top: 7px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 7px 5px 0 5px;
+      border-color: #000000 transparent transparent transparent;
+      z-index: 5;
+      pointer-events: none;
+  }
+    
+  .opcionador select {
+      padding: 5px 8px;
+      width: 130%;
+      border: none;
+      box-shadow: none;
+      background-color: transparent;
+      background-image: none;
+      appearance: none;
+  }
+
+  .etiqueta {
+      border-radius: 10px;
+      position: right;
+  }
+
+  .verde {
+    background-color: #35F213;
+  }
+
+  .naranja {
+    background-color: #F0710E;
+  }
+
+  .amarillo {
+    background-color: #F8ED09
+  }
+
+  .rojo {
+    background-color: #FF0000;
+  }
+
+  .gris {
+    background-color: #635244;
+  }
