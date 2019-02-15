@@ -24,8 +24,12 @@ include('styles/mapa/overall/header-mapa.php');
     <div id="datos-a-cargar">
         <div class="col-sm-12 espacio">
             <div>Filtrar Por:</div>
-            <br>
-            <div>Seleccionar Tipo Accidente:</div>
+            <div>
+                <input type="checkbox" id="activar_acc"> Accidentes
+                <br>
+                <input type="checkbox" id="activar_del"> Delitos
+            </div>
+            <div id="lblacc">Seleccionar Causa del Accidente:</div>
             <div>
                 <select id="estadogg" class="opcionador" onchange="mostrarmarcadores()" >
                     <option value="todos">Mostrar Todo</option>
@@ -41,6 +45,24 @@ include('styles/mapa/overall/header-mapa.php');
                     ?>
                 </select>
             </div>
+
+            <div id="lbldel">Seleccionar tipo de Delito:</div>
+            <div>
+                <select id="tipo_delito" class="opcionador" onchange="mostrarmarcadores_del()" >
+                    <option value="todos">Mostrar Todo</option>
+                    <?php
+                    function limpia_espacios_del($cadena){
+                        $cadena = str_replace(' ', '', $cadena);
+                        return $cadena;
+                    }
+                    foreach($delitos as $op){
+                        ?>
+                        <option value="<?php $rrr = limpia_espacios_del($op->delito_nombre); echo $rrr;?>"><?php echo $op->delito_nombre;?></option><?php
+                    }
+                    ?>
+                </select>
+            </div>
+
         </div>
         <div class="col-sm-12 espacio">
             <div>Fecha de Inicio:</div>
@@ -79,6 +101,33 @@ include('styles/mapa/overall/header-mapa.php');
 <script type="text/javascript">
     $(document).ready(function(){
         mostraropcionesderecha()
+    });
+
+    //validar checkbox
+
+    $('#activar_acc').click(function () {
+       if ($('#activar_acc').is(':checked')){
+           $('#estadogg').show();
+           $('#lblacc').show();
+       }
+       else {
+           $('#estadogg').attr("disabled", "disabled");
+           $('#estadogg').hide();
+           $('#lblacc').hide();
+       }
+    });
+
+    $('#activar_del').click(function () {
+        if ($('#activar_del').is(':checked')){
+            $('#tipo_delito').removeAttr("disabled");
+            $('#tipo_delito').show();
+            $('#lbldel').show();
+        }
+        else {
+            $('#tipo_delito').attr("disabled", "disabled");
+            $('#tipo_delito').hide();
+            $('#lbldel').hide();
+        }
     });
 
     var opciones = true;
@@ -201,6 +250,13 @@ include('styles/mapa/overall/header-mapa.php');
             $abc++;
     }
 
+    $ab = '0';
+    foreach ($robos as $metad){
+    $punt = "punt" . $ab;
+    ?> var <?php echo $punt;?>;<?php
+    $ab++;
+    }
+
 
     ?>
 
@@ -213,6 +269,7 @@ include('styles/mapa/overall/header-mapa.php');
             zoom: 13
         };
         map = new google.maps.Map(document.getElementById('mapa'), opciones);
+
 
             <?php
             $i = '0';
@@ -237,11 +294,41 @@ include('styles/mapa/overall/header-mapa.php');
             <?php echo $infowindow;?>.open(map, <?php echo $punto;?>);
         });
 
-
         <?php
         $i++;
         }
         ?>
+
+            <?php
+            $j = '0';
+            foreach ($robos as $met){
+            $info = "info" . $j;
+            $punt = "punt" . $j;
+            ?>var <?php echo $info;?> = new google.maps.InfoWindow();
+        <?php echo $punt;?> = new google.maps.Marker({
+            position: {lat: <?php echo $met->calle_x;?>, lng: <?php echo $met->calle_y;?>},
+            dateI: '<?php echo $met->robos_fecha;?>',
+            map: map,
+            icon: '<?php echo $met->imagen;?>',
+            title:'<?php $datog = limpia_espacios($met->delito_nombre); echo $datog;?>'});
+        <?php echo $info;?>.setContent('' +
+            '<label style="color:black;">Tipo Delito: <?php echo $met->delito_nombre;?></label><br>' +
+            '<label style="color:black;">Tipo Arma: <?php echo $met->arma_nombre;?></label><br>' +
+            '<label style="color:black;">Descripción:<?php echo $met->robos_descripcion;?></label><br>' +
+            '<label style="color:black;">Fecha:<?php echo $met->robos_fecha;?></label><br>' +
+            '<label style="color:black;">Lugar:<?php echo $met->calle_nombre;?></label><br>' +
+            '');
+        <?php echo $punt;?>.addListener('click', function() {
+            <?php echo $info;?>.open(map, <?php echo $punt;?>);
+        });
+
+        <?php
+        $j++;
+        }
+        ?>
+
+
+
 
     }
     
@@ -267,10 +354,38 @@ include('styles/mapa/overall/header-mapa.php');
         $abcde++;
         }
         ?>
+
+
+
+    }
+
+    function mostrarmarcadores_del() {
+        $('#fechainicio').val('');
+        $('#fechafin').val("<?php echo date("Y-m-d");?>");
+        var activ = $('#tipo_delito').val();
+        var fech;
+        var fechg;
+        <?php
+        $abcdey = '0';
+        foreach ($robos as $mtadosdes){
+        $puntots = "punt" . $abcdey;
+        ?>
+        fech = new Date(<?php echo $puntots;?>.dateI);
+        fechg = fech.getDate();
+        if(<?php echo $puntots;?>.title == activ || activ == 'todos'){
+            <?php echo $puntots;?>.setMap(map);
+        } else {
+            <?php echo $puntots;?>.setMap(null);
+        }
+        <?php
+        $abcdey++;
+        }
+        ?>
     }
 
     function mostrarporfecha() {
         $('#estadogg').val('todos');
+        $('#tipo_delito').val('todos');
         var fechai = $('#fechainicio').val();
         var fechaf = $('#fechafin').val();
 
@@ -302,9 +417,30 @@ include('styles/mapa/overall/header-mapa.php');
                 $abcdef++;
                 }
                 ?>
+
+                <?php
+                $abcdefg = '0';
+                foreach ($robos as $metadosdesai){
+                $puntote = "punt" . $abcdefg;
+                $fechas = "fechasd" . $abcdefg;
+                $fecha = "fechas" . $abcdefg;
+                ?>
+                var <?php echo $fechas;?> = new Date(<?php echo $puntote;?>.dateI);
+                var <?php echo $fecha;?> = <?php echo $fechas;?>.getTime();
+                if(<?php echo $fecha;?> > fechainicio && <?php echo $fecha;?> < fechafinal){
+                    <?php echo $puntote;?>.setMap(map);
+                } else {
+                    <?php echo $puntote;?>.setMap(null);
+                }
+                <?php
+                $abcdefg++;
+                }
+                ?>
+
             }
         }
     }
+
 </script>
 </body>
 </html>

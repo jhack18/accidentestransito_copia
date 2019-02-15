@@ -4,6 +4,7 @@
 
 <script>
     var map;
+    var map_del;
 
     window.onload = function () {
 
@@ -25,7 +26,6 @@
             position: {lat: <?php echo $meta->calle_x;?>, lng: <?php echo $meta->calle_y;?>},
             map: map});
         <?php echo $infowindow;?>.setContent('' +
-            '<label style="color:black;">Motivo Accidente: <?php echo $meta->causaaccidente_nombre;?></label><br>' +
             '<label style="color:black;">¿Accidente Fatal?: <?php echo $meta->accidente_fatal;?></label><br>' +
             '<label style="color:black;">Descripción:<?php echo $meta->accidente_descripcion;?></label><br>' +
             '<label style="color:black;">Fecha:<?php echo $meta->accidente_fecha;?></label><br>' +
@@ -39,6 +39,32 @@
         $i++;
         }
         ?>
+
+            <?php
+            $j = '0';
+            foreach ($robos as $metas){
+            $infowindows = "infowindow" . $j;
+            $puntos = "punto" . $j;
+            ?>var <?php echo $infowindows;?> = new google.maps.InfoWindow();
+        var <?php echo $puntos;?> = new google.maps.Marker({
+            position: {lat: <?php echo $metas->calle_x;?>, lng: <?php echo $metas->calle_y;?>},
+            map_del: map_del});
+        <?php echo $infowindows;?>.setContent('' +
+            '<label style="color:black;">Tipo Delito: <?php echo $metas->delito_nombre;?></label><br>' +
+            '<label style="color:black;">Tipo Arma: <?php echo $metas->arma_nombre;?></label><br>' +
+            '<label style="color:black;">Descripción:<?php echo $metas->robos_descripcion;?></label><br>' +
+            '<label style="color:black;">Fecha:<?php echo $metas->robos_fecha;?></label><br>' +
+            '');
+        <?php echo $puntos;?>.addListener('click', function() {
+            <?php echo $infowindow;?>.open(map_del, <?php echo $puntos;?>);
+        });
+
+
+        <?php
+        $j++;
+        }
+        ?>
+
 
     }
 </script>
